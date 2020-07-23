@@ -85,3 +85,4 @@ class Language(models.Model):
     def __str__(self):
         # String for representing the model object.
         return self.name
+        
