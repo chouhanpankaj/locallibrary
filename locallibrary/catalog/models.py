@@ -21,6 +21,13 @@ class Book(models.Model):
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+
+    def display_genre(self):
+        """Create a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    
+    display_genre.short_description = 'Genre'
+
     def __str__(self):
         #String for representing the Model object.
         return self.title
@@ -85,4 +92,3 @@ class Language(models.Model):
     def __str__(self):
         # String for representing the model object.
         return self.name
-        
