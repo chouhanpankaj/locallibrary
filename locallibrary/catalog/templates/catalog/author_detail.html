@@ -1,1 +1,15 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<h1> <strong>Author: </strong>{{author}}</h1>
+<p><strong>DOB: </strong>{{author.data_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %}</p>
+<div style="margin-left:20px; margin-top:20px;">
+    <h4><strong>Books</strong></h4>
+    <dl>
+        {% for book in author.book_set.all %}
+        <dt><a href="{% url 'book-detail' book.pk %}">{{book}}</a>({{book.book_instance_set.all.count}})</dt>
+        <dd>{{book.summary}}</dd>
+        {% endfor %}
+    </dl>
+</div>
+{% endblock %}
